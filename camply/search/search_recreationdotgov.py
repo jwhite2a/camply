@@ -113,6 +113,7 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         )
         self.campsites = make_list(campsites)
         self.campgrounds = self._get_searchable_campgrounds()
+        self.campgrounds = [c for c in self.campgrounds if c.facility_id==445864] # HACK to remove old campground
         self.campsite_metadata: Optional[pd.DataFrame] = None
         self.equipment: List[Tuple[str, Optional[int]]] = []
         self.equipment = self._get_searchable_equipment(equipment=equipment)

@@ -1,0 +1,59 @@
+python camply/cli.py --provider=RecreationDotGovPermit list-campsites --rec-area=13414
+
+[2026-03-10 02:03:04] INFO     ⛰  King Range Wilderness, USA (#13414) - 🏕  (Old) King Range Wilderness Permits (Lost Coast) (Old) (#72192)                   
+[2026-03-10 02:03:04] INFO     ⛰  King Range Wilderness, USA (#13414) - 🏕  King Range Wilderness Permits (Lost Coast) (#445864) 
+
+curl -LsSf https://astral.sh/uv/install.sh | sh
+sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
+^^installed to local repo
+
+
+Second Install Round:
+
+Already installed UV:
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+git clone https://github.com/juftin/camply.git
+git remote add changlan https://github.com/changlan/camply
+git fetch changlan
+git merge changlan/permit
+
+https://www.recreation.gov/api/permitinyo/445864/availabilityv2?start_date=2026-05-01&end_date=2026-05-31&commercial_acct=false
+^ correct URL
+
+https://www.recreation.gov/api/permits/72192/availability
+^ changlan URL
+
+--campsite 445864
+
+CORRECT COMMAND
+python camply/cli.py --provider=RecreationDotGovPermit campsites --rec-area=13414 --search-forever --start-date 2026-06-22 --end-date 2026-06-25 --notifications pushbullet
+python camply/cli.pii test-notifications --notification pushbullet
+
+task build - no wheel build?
+
+correct PIP for venv:
+python -m ensurepip --default-pip
+python -m pip install build
+python -m build
+
+# Wheel failed on termux, no solve
+# zip and installed python dependencies in venv on device for termux
+
+termux-setup-storage
+mv /storage/emulated/0/Download/...
+unzip *.zip
+
+python -m venv venv # works on termux!
+pip install .
+
+
+TERMUX SETUP
+pip3 install setuptools wheel packaging pyproject_metadata cython meson-python versioneer
+LDFLAGS="-lpython3.12" pip3 install --no-build-isolation --no-cache-dir numpy
+LDFLAGS="-lpython3.12" pip3 install --no-build-isolation --no-cache-dir pandas==2.3
+pip install .
+
+GIT FORK PUSH FROM ORIGINAL repo
+git remote -v
+
